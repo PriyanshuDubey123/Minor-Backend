@@ -1,0 +1,510 @@
+[
+    {
+      "id": 1,
+      "category": "IIT JEE",
+      "title": "IIT JEE Mastery",
+      "thumbnail": "https://cache.careers360.mobi/media/article_images/2021/12/23/NSEJS-Syllabus.webp",
+      "description": "Comprehensive IIT JEE prepration course, expertly crafted for mastery in Physics, Chemistry, and Mathematics.",
+      "price": 2400,
+      "rating": 4.5,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Dr. Ajay Gupta",
+            "imageSrc": "https://media.istockphoto.com/id/610021016/photo/young-professor.jpg?s=612x612&w=0&k=20&c=4Z8-S0QVqCKkujyw8ZFTmDpZreiK7rceBYNhptQ7k3I="},
+            {"name": "Dr. Mitali Singh",
+            "imageSrc": "https://media.istockphoto.com/id/1413257905/photo/thoughtful-woman-reading-book-at-library.jpg?s=612x612&w=0&k=20&c=Tu5ogsWacDkbssZQsIGjAJ6UlG8sVq6QALB_YlDiVHk="},
+            {"name": "Dr. Hareesh Sharma",
+          "imageSrc": "https://media.istockphoto.com/id/1212173792/photo/portrait-of-a-smiling-man-of-indian-ethnicity.jpg?s=612x612&w=0&k=20&c=GBx8zlevwhRK9MWM-WWbTLod7-A-K_hawJD7VMEASyU="}
+      ]
+    },
+    {
+      "id": 2,
+      "category": "UPSC",
+      "title": "UPSC NCERT Foundation",
+      "thumbnail": "https://www.eliteias.in/wp-content/uploads/2021/05/Benefits-of-UPSC-Civil-Services-Exam-Preparation.jpg",
+      "description": "UPSC prep: Master subjects, strategies, and succeed in examinations.",
+      "price": 2999,
+      "rating": 4.3,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Megha Shrivastava",
+          
+              "imageSrc": "https://media.istockphoto.com/id/1330255704/photo/confident-smiling-indian-school-teacher-with-students-in-background.jpg?s=612x612&w=0&k=20&c=jYxM1L_vZrAIQi7KmZ3zl7vhg8kltqo5vZOlXJoiNBk="},
+              {"name": "Vikram Patel",
+              "imageSrc": "https://media.istockphoto.com/id/1005817658/photo/middle-aged-man-with-pleasant-face-expression.jpg?s=612x612&w=0&k=20&c=3YTdAT-m9io-zEF2aOmJsRz7tKVHlHSHvDFSILp6FAY="},
+              {"name": "Dr. Aditya Mehta",
+          "imageSrc": "https://media.istockphoto.com/id/1541879979/photo/portrait-of-smart-mature-indian-man-wearing-suit-reading-a-book-while-sitting-at-desk-in.jpg?s=612x612&w=0&k=20&c=QYcZqr6WOZdbwbtzzTguhOmMA0VSsKJgqs43lvRPEmE="}
+      ]
+    },
+    {
+      "id": 3,
+      "category": "Bank exams",
+      "title": "Crack SBI PO 2024",
+      "thumbnail": "https://cache.careers360.mobi/media/article_images/2021/12/23/NSEJS-Syllabus.webp",
+      "description": "Ace Aptitude: Master problem-solving skills with our comprehensive preparation course for success.",
+      "price": 1999,
+      "rating": 4.8,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Arjun Sharma",
+          "imageSrc": "https://www.istockphoto.com/photo/outdoor-portrait-of-one-confident-cheerful-indian-businessman-gm185221418-19858749?phrase=indian%20male%20professor%20with%20no%20background&searchscope=image%2Cfilm"},
+          {"name": "Vikram Joshi",
+          "imageSrc": "https://media.istockphoto.com/id/1386910472/photo/handsome-mid-adult-posing.jpg?s=612x612&w=0&k=20&c=gydT4F748QSyUGE58VI8DveOcyzM6vxdrgaq4yZfyyg="}
+        
+      ]
+    },
+    {
+      "id": 4,
+      "category": "CBSE class 12",
+      "title": "BoardMaster Class",
+      "thumbnail": "https://cdn.dnaindia.com/sites/default/files/styles/full/public/2021/06/22/980658-970386-cbse-curriculam.jpgp",
+      "description": "Elevate your board exam success with our comprehensive and targeted preparation course.",
+      "price": 2100,
+      "rating": 4.4,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Anjali Gupta",
+            "imageSrc": "https://media.istockphoto.com/id/1395601958/photo/high-school-teacher-in-a-library.jpg?s=612x612&w=0&k=20&c=Oo0KxmflVTo3-7CL5nknzDYhcOLXUpvorZhFH9DuhtY="},
+            {"name": "Rohit Patel",
+            "imageSrc": "https://media.istockphoto.com/id/1386910472/photo/handsome-mid-adult-posing.jpg?s=612x612&w=0&k=20&c=gydT4F748QSyUGE58VI8DveOcyzM6vxdrgaq4yZfyyg="},
+            {"name": "Vikram Joshi",
+            "imageSrc": "https://media.istockphoto.com/id/1414062353/photo/smiling-young-indian-business-man-wearing-suit-standing-in-office-portrait.jpg?s=612x612&w=0&k=20&c=ypM13ps_HgydMFpI0ffg1YAwBCMrPPIAr1zBU_Gvb30="},
+            {"name": "Deepak Verma",
+            "imageSrc": "https://media.istockphoto.com/id/493107388/photo/portrait-of-a-teacher-smiling-in-front-of-a-whiteboard.jpg?s=612x612&w=0&k=20&c=WLTyVFYZaVl6jalboBPOLibyc0UtaUVn9-YIRDb7Krc="}
+      ]
+    },
+    {
+      "id": 5,
+      "category": "SSC exams",
+      "title": "Crack SSC DGL 2024",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4VcUfhaM3WsJqq3Asy6p8Y63EnHyD7JYYtw&usqp=CAU",
+      "description": "SSC success made simple: comprehensive prep for optimal exam performance.",
+      "price": 2399,
+      "rating": 4.3,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Rajan Singh",
+          "name": "Priya Patel"
+        },
+        {
+          "imageSrc": "https://media.istockphoto.com/id/1143038506/photo/young-indian-man.jpg?s=612x612&w=0&k=20&c=MhidRiKfj0W9hT6c1wOlENguGkle4fHH77IM61VhqE8=",
+          "imageSrc": "https://media.istockphoto.com/id/1331416362/photo/confident-smiling-indian-school-teacher-standing-in-front-of-the-blackboard-in-classroom.jpg?s=612x612&w=0&k=20&c=Dhp6UKDQq0l1KSEfYioBImjDSbwyRqxRkmEwhEfd7qk="
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "category": "NEET UG",
+      "title": "NEET Success Blueprint",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbvt79FpZGwcgFdEb549IE_iU1cM70dbXrzyL9YQ8yYzL83znZSxJqC3UCmhhTERTEaNI&usqp=CAU",
+      "description": "Comprehensive NEET preparation for success: lectures, practice, mock exams, guidance.",
+      "price": 2999,
+      "rating": 4.7,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Dr. B.R. Sinha",
+          "name": "Riya Patil",
+          "name": "Ankit Gupta"
+        },
+        {
+          "imageSrc": "https://media.istockphoto.com/id/1298800629/photo/portrait-of-confident-male-doctor-looking-at-camera.jpg?s=612x612&w=0&k=20&c=CB3h3a-0yUBgaZHhF2Kd5ibfDv25Qcjsca-ia5gIWUM=",
+          "imageSrc": "https://media.istockphoto.com/id/183285053/photo/modern-indian-confident-attractive-mid-aged-business-woman-lecturer-professor.jpg?s=612x612&w=0&k=20&c=V9LqhMcaLZSoSRYyVxKSe72oHPAIaswp26eCTOLkygU=",
+          "imageSrc": "https://media.istockphoto.com/id/1212172498/photo/portrait-of-a-cheering-man-of-indian-ethnicity-holding-books.jpg?s=612x612&w=0&k=20&c=OgmX-UhcmQ36tkOZ3HKtIR_E9uUYaVBLDkA57_N0RP0="
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "category": "UPSC",
+      "title": "UPSC premils Pro",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeSdhiS3_F3bqsp-dZptHR_1I6ifgOU7RLbg&usqp=CAU",
+      "description": "UPSC course: Master content, strategies, and excel in examinations.",
+      "price": 2100,
+      "rating": 4.1,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Hemant Mehta",
+          "name": "Hardik Shrivastava"
+        },
+        {
+          "imageSrc": "https://media.istockphoto.com/id/1541952893/photo/portrait-indian-senior-man-wearing-eye-glasses-standing-cross-arm-indoors-retired-asian-old.jpg?s=612x612&w=0&k=20&c=EPTUEmgtBJ-Hhiti6gMXi4rnnIL4J-ODTqMW2sj5ofE=",
+          "imageSrc": "https://media.istockphoto.com/id/1334828664/photo/indian-architect.jpg?s=612x612&w=0&k=20&c=W7fOG_JIbP6WEcSMR3lOjUjSRLEFXHdtkOkUUz0ztT0="
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "category": "IIT JEE",
+      "title": "IIT JEE Supreme",
+      "thumbnail": "https://cache.careers360.mobi/media/article_images/2021/12/23/NSEJS-Syllabus.webp",
+      "description": "JEE Mains ans Advance success: theory, practice, and problem-solving mastery.",
+      "price": 3000,
+      "rating": 4.7,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Rohit Rajoriya",
+          "name": "Rishi Choudhary",
+          "name": "Neeta Mishra"
+        },
+        {
+          "imageSrc": "https://media.istockphoto.com/id/938849022/photo/handsome-indian-man.jpg?s=612x612&w=0&k=20&c=qdZFJH9a1vjH79HCX-FUNStaScqFfEc_XEJe73Pb-rk=",
+          "imageSrc": "https://media.istockphoto.com/id/1205280070/photo/man-in-front-of-blackboard-at-school.jpg?s=612x612&w=0&k=20&c=vo8t_rz87SK6fDIHK4t6ry9J-hcQvWcS7R1iQY3oEqw=",
+          "imageSrc": "https://media.istockphoto.com/id/1299931697/photo/teacher-in-saree-standing-poses-in-studio.jpg?s=612x612&w=0&k=20&c=5TXnGVGmrtcxc6YyPvjtWtztVjH_4Ehf3U2fFrE8f5Y="
+        }
+      ]
+    },
+    {
+        "id": 9,
+        "category": "Bank exams",
+        "title": "Master Statistics",
+        "thumbnail": "https://www.thoughtco.com/thmb/vPZchuBNtuGgiChRefakysv1saQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/bar-chart-build-of-multi-colored-rods-114996128-5a787c8743a1030037e79879.jpg",
+        "description": "Learn Statistics: theory, practice, and problem-solving mastery.",
+        "price": 1999,
+        "rating": 3.9,
+        "discountPercentage": 20,
+        "teachers": [
+          {
+            "name": "Abhay Morya"
+          },
+          {
+            "imageSrc": "https://media.istockphoto.com/id/1205280070/photo/man-in-front-of-blackboard-at-school.jpg?s=612x612&w=0&k=20&c=vo8t_rz87SK6fDIHK4t6ry9J-hcQvWcS7R1iQY3oEqw="
+          }
+        ]
+    },
+    {
+        "id": 10,
+        "category": "CBSE class 12",
+        "title": "Commerce class 12th",
+        "thumbnail":"https://1.bp.blogspot.com/-NvYz7kODB9M/Xr4xN99IuQI/AAAAAAAAETI/q-8sNVKZN_Q9Z7TkKHO-1Hnj1k38_DnJgCPcBGAYYCw/s1600/images%2B%252810%2529.jpg",
+        "description": "12th Commerce:Crack CBSE board 2024 with top grades.",
+        "price": 2999,
+        "rating": 4.5,
+        "discountPercentage": 20,
+        "teachers": [
+          {
+            "name": "Gautam Nayak",
+            "name":"Anuj Tripathi",
+            "name":"Asha Mishra"
+          },
+          {
+            "imageSrc": "https://media.istockphoto.com/id/1205280070/photo/man-in-front-of-blackboard-at-school.jpg?s=612x612&w=0&k=20&c=vo8t_rz87SK6fDIHK4t6ry9J-hcQvWcS7R1iQY3oEqw=",
+            "imageSrc":"https://media.istockphoto.com/id/1205280102/photo/man-in-front-of-blackboard-at-school.jpg?s=612x612&w=0&k=20&c=EUqZveIoa5M4fdtPPip4iSyGXuapqrJEKu-c_-YRPrc=",
+            "imageSrc":"https://media.istockphoto.com/id/1482886552/photo/portrait-of-happy-indian-young-teacher-holding-book-looking-at-camera-in-isolated-white.jpg?s=612x612&w=0&k=20&c=dgQfJRa4SlYTWRt4nAbIX1sXCSh_47In8qF0fQkyQjs="
+          }
+        ]
+    },
+    {
+        "id": 11,
+        "category": "CAT",
+        "title": "Crack CAT 2024",
+        "thumbnail":"https://img.studydekho.com/uploads/c/2023/1/17750-c-processed-02c422bf-79e7-4aa2-83db-1359ad2d1b1a-hxm2engw.jpeg",
+        "description": "Comprehensive CAT prep: strategies, practice, mocks, and expert guidance.",
+        "price": 2450,
+        "rating": 4.4,
+        "discountPercentage": 20,
+        "teachers": [
+          {
+            "name": "Neha Yadav",
+            "name": "Muskan Sharma",
+            "name": "Nishant Jain"
+          },
+          {
+            "imageSrc": "https://media.istockphoto.com/id/1205280070/photo/man-in-front-of-blackboard-at-school.jpg?s=612x612&w=0&k=20&c=vo8t_rz87SK6fDIHK4t6ry9J-hcQvWcS7R1iQY3oEqw=",
+            "imageSrc":"https://media.istockphoto.com/id/1330255708/photo/portrait-of-smiling-teacher-in-school-corridor-with-books-in-hand.jpg?s=612x612&w=0&k=20&c=uL_vENUw7dccgUwjGcIwMMU_5Ew9BM5C8A0jInwn_hk=",
+            "imageSrc":"https://media.istockphoto.com/id/1482886552/photo/portrait-of-happy-indian-young-teacher-holding-book-looking-at-camera-in-isolated-white.jpg?s=612x612&w=0&k=20&c=dgQfJRa4SlYTWRt4nAbIX1sXCSh_47In8qF0fQkyQjs="
+          }
+        ]
+    },
+    {
+        "id": 12,
+        "category": "SSC exams",
+        "title": "Ace General Awareness",
+        "thumbnail":"https://img.jagranjosh.com/imported/images/E/Articles/CHSLSSCGeneralAwarenessImportantTopics2019.jpg",
+        "description": "Comprehensive course covering diverse topics for broad general awareness preparation.",
+        "price": 1799,
+        "rating": 4.0,
+        "discountPercentage": 20,
+        "teachers": [
+          {
+            "name": "Aarti Singh"
+          },
+          {
+            "imageSrc": "https://media.istockphoto.com/id/1198252595/photo/cheerful-indian-girl-standing-at-home-office-looking-at-camera.jpg?s=612x612&w=0&k=20&c=1Vg2tc7MlVlA7GlS_6EMkQ5qBNSpdIgPgVaulbo31Ao="
+          }
+        ]
+    },
+    {
+        "id": 13,
+        "category": "UPSC",
+        "title": "Learn Social Studies",
+        "thumbnail":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgazChCKKNBvapw458q-IOqNc8C7bJBtHMvQ&usqp=CAU",
+        "description": "Social Studies course covering history, culture, and global perspectives.",
+        "price": 1899,
+        "rating": 4.0,
+        "discountPercentage": 20,
+        "teachers": [
+          {
+            "name": "Ajay Sinha",
+            "name":"Soniya Nema"
+          },
+          {
+            "imageSrc":"https://media.istockphoto.com/id/177383755/photo/indian-businessman.jpg?s=612x612&w=0&k=20&c=WPeUUHVTPeYxemSCQL-s9GIzy5vYZRB_ozmA35blK9Q=",
+            "imageSrc": "https://media.istockphoto.com/id/1310208267/photo/portrait-of-indian-woman-as-a-teacher-in-sari-standing-isolated-over-white-background-stock.jpg?s=612x612&w=0&k=20&c=UpkNhqazjP4CNvndwC_Qus1SwAEc1ogPOGpIDmWd4bk="
+          }
+        ]
+    },
+    {
+      "id": 14,
+      "category": "NEET UG",
+      "title": "MediPrep Excellence",
+      "thumbnail":"https://medicaldialogues.in/h-upload/2023/02/27/203326-neet-pg-admission.webp",
+      "description": "Intensive NEET prep: biology, chemistry, physics mastery for medical entrance.",
+      "price": 2699,
+      "rating": 4.7,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Dr.Digambar Joshi",
+          "name": "Rishabh Yadav",
+          "name": "Priya Singh"
+        },
+        {
+          "imageSrc":"https://media.istockphoto.com/id/1448069367/photo/portrait-of-happy-indian-mature-professor-of-university-or-college-or-standing-outdoor.jpg?s=612x612&w=0&k=20&c=d5BMdMZvo__2w8h82gcnkpVwPr4_gJCpzD-fdnJSpzQ=",
+          "imageSrc": "https://media.istockphoto.com/id/1212173792/photo/portrait-of-a-smiling-man-of-indian-ethnicity.jpg?s=612x612&w=0&k=20&c=GBx8zlevwhRK9MWM-WWbTLod7-A-K_hawJD7VMEASyU=",
+          "imageSrc":"https://media.istockphoto.com/id/1331422830/photo/confident-smiling-indian-school-teacher-with-students-in-background.jpg?s=612x612&w=0&k=20&c=Y6yICEM3uqYlF0f-PyNPUuVXyjcOyoaqToKZv8vyNZY="
+        }
+      ]
+  },
+  {
+      "id": 15,
+      "category": "CA intermediate",
+      "title": "CA Intermediate Excellence Course",
+      "thumbnail":"https://static.javatpoint.com/fullformpages/images/ca.jpg",
+      "description": "Comprehensive CA Intermediate prep: theory, practice, and exam strategies.",
+      "price": 2999,
+      "rating": 4.4,
+      "discountPercentage": 20,
+      "teachers": [
+        {
+          "name": "Hemant Joshi",
+          "name": "Harshad Parsai",
+          "name": "Mahak Singh"
+        },
+        {
+          "imageSrc":"https://media.istockphoto.com/id/1288039261/photo/portrait-of-a-smiling-middle-aged-man-of-indian-origin.jpg?s=612x612&w=0&k=20&c=hksg2MpAsM6pQSR-TASLnfFE4-sDPcYHyE6-edycJDI=",
+          "imageSrc": "https://media.istockphoto.com/id/1212173792/photo/portrait-of-a-smiling-man-of-indian-ethnicity.jpg?s=612x612&w=0&k=20&c=GBx8zlevwhRK9MWM-WWbTLod7-A-K_hawJD7VMEASyU=",
+          "imageSrc":"https://media.istockphoto.com/id/1320811404/photo/head-shot-portrait-smiling-confident-indian-businesswoman-with-arms-crossed.jpg?s=612x612&w=0&k=20&c=o-GfYeWu463WIoV4v2ws6qIxoO4gwcZH_I254yJsg3c="
+        }
+      ]
+  },
+  {
+    "id": 16,
+    "category": "Bank exams",
+    "title": "Master English Comprehension",
+    "thumbnail":"https://media.istockphoto.com/id/1047570732/vector/english.jpg?s=612x612&w=0&k=20&c=zgafUJxCytevU-ZRlrZlTEpw3mLlS_HQTIOHLjaSPPM=",
+    "description": "Enhance English comprehension skills through comprehensive reading and analysis techniques.",
+    "price": 1899,
+    "rating": 4.4,
+    "discountPercentage": 20,
+    "teachers": [
+      {
+        "name": "Hetal Shah"
+      },
+      {
+        "imageSrc":"https://media.istockphoto.com/id/1146921519/photo/teacher-with-school-children-at-campus.jpg?s=612x612&w=0&k=20&c=SNOtAr44r__Zvq0F_e5HOs-LN5X9bRJut9rW04_RthQ="
+      }
+    ]
+},
+{
+    "id": 17,
+    "category": "Bank exams",
+    "title": "Aptitude Basic to Advance",
+    "thumbnail":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzqKTzIe4DyQOWlUxNAHyywYysWgrNh2ssHA&usqp=CAU",
+    "description": "Aptitude course: sharpen skills, solve problems, excel in assessments confidently.",
+    "price": 2199,
+    "rating": 4.3,
+    "discountPercentage": 20,
+    "teachers": [
+      {
+        "name": "Himani Sahu",
+        "name":"Anuj Patel"
+      },
+      {
+        "imageSrc":"https://media.istockphoto.com/id/1289489558/photo/young-indian-female-school-teacher-or-college-professor.jpg?s=612x612&w=0&k=20&c=cylXQXXGqrgcmWY4mgl17yqXJXqgvvImtFFoQkD3Uco=",
+        "imageSrc":"https://media.istockphoto.com/id/1212172498/photo/portrait-of-a-cheering-man-of-indian-ethnicity-holding-books.jpg?s=612x612&w=0&k=20&c=OgmX-UhcmQ36tkOZ3HKtIR_E9uUYaVBLDkA57_N0RP0="
+      }
+    ]
+},
+{
+  "id": 18,
+  "category": "IIT JEE",
+  "title": "Catalyst JEE Success",
+  "thumbnail":"https://cache.careers360.mobi/media/article_images/2022/3/1/jee-main-2022.jpeg",
+  "description": "Intensive JEE prep: Physics, Chemistry, Math, problem-solving, mock tests, strategies.",
+  "price": 2290,
+  "rating": 4.2,
+  "discountPercentage": 20,
+  "teachers": [
+    {
+      "name": "Lakhan Mehta",
+      "name":"Riya Verma",
+      "name":"Animesh Tiwari"
+    },
+    {
+      "imageSrc":"https://media.istockphoto.com/id/1420975024/photo/happy-indian-business-man-teacher-standing-in-front-of-bookshelves-portrait.jpg?s=612x612&w=0&k=20&c=9CoYLnQaOugaFcRpj9X76R8Bkch1N0Z-z_wOVvKEd_o=",
+      "imageSrc":"https://media.istockphoto.com/id/1329365227/photo/portrait-of-indian-teacher-standing-front-of-blackboard.jpg?s=612x612&w=0&k=20&c=qgKVQ1PqnvMun2An_X2-6pYupWhjjIPQfJ7qfQVoz_Q=",
+      "imageSrc":"https://media.istockphoto.com/id/1414062353/photo/smiling-young-indian-business-man-wearing-suit-standing-in-office-portrait.jpg?s=612x612&w=0&k=20&c=ypM13ps_HgydMFpI0ffg1YAwBCMrPPIAr1zBU_Gvb30="
+    }
+  ]
+},
+{
+  "id": 19,
+  "category": "SSC exams",
+  "title": "Extensive SSC prep",
+  "thumbnail":"https://play-lh.googleusercontent.com/k0DX9T7J65A-6gZdMAHp5GTMmUMsmcMMpz2d4NhFTYjCzCSH2BlHTcdFw5XjLExxUQ",
+  "description": "SCC prep course: Comprehensive training for success in diverse subjects.",
+  "price": 2299,
+  "rating": 4.6,
+  "discountPercentage": 20,
+  "teachers": [
+    {
+      "name": "Mahima Jumnani",
+      "name":"Lata Tiwari"
+    },
+    {
+      "imageSrc":"https://media.istockphoto.com/id/1476622031/photo/portrait-of-happy-businesswoman-video-confidence-on-white-background-stock-photo.jpg?s=612x612&w=0&k=20&c=6oxeJbMkMbPEHq5-NVenOTFY8nJqkNJaJghO47RkBAg=",
+      "imageSrc":"https://media.istockphoto.com/id/481627439/photo/indian-woman-portrait.jpg?s=612x612&w=0&k=20&c=tXVUZYwl3vmKOrubtAg4kHQJl-5yWTFwQIZkKORvAac="
+    }
+  ]
+},
+{
+  "id": 20,
+  "category": "CAT",
+  "title": "CAT Power Prep",
+  "thumbnail":"https://mycareersview.com/afile/mcv16614_main-qimg-836b2fa60c99217d228da3a21da8feab.png",
+  "description": "Intensive CAT prep: Quant, Verbal, LR, Mocks, Strategies, Time Management.",
+  "price": 1799,
+  "rating": 4.0,
+  "discountPercentage": 20,
+  "teachers": [
+    {
+      "name":"Khushi Manjhi",
+      "name":"Rohan Mehra"
+    },
+    {
+      "imageSrc":"https://media.istockphoto.com/id/1199847347/photo/head-shot-studio-portrait-millennial-pleasant-indian-ethnicity-worker.jpg?s=612x612&w=0&k=20&c=9hKMYfxTp4ExwRC8uRXv6u7x9dj0PBQ_IQpw3dp4rq4=",
+      "imageSrc":"https://media.istockphoto.com/id/1691089534/photo/serious-thinking-businessman-programmer-looking-at-camera-with-crossed-arms-indian-man.jpg?s=612x612&w=0&k=20&c=TD9c0Pvuykjz1Nku6oW5-VSsttoE89DFgBfF5rj8eRs="
+    }
+  ]
+},
+{
+  "id": 21,
+  "category": "CBSE class 12",
+  "title": "12th PCM Excellence",
+  "thumbnail":"https://media.istockphoto.com/id/1219382595/vector/math-equations-written-on-a-blackboard.jpg?s=612x612&w=0&k=20&c=ShVWsMm2SNCNcIjuWGtpft0kYh5iokCzu0aHPC2fV4A=",
+  "description": "12th-grade course focusing on exam preparation and academic excellence.",
+  "price": 2799,
+  "rating": 4.3,
+  "discountPercentage": 20,
+  "teachers": [
+    {
+      "name":"Dharmendra Choudhary",
+      "name":"Tipendra Bhosle",
+      "name": "Manju Gupta"
+    },
+    {
+      "imageSrc":"https://media.istockphoto.com/id/1333351057/photo/smart-and-intelligent-indian-man-in-suit-stands-near-whiteboard-with-diagrams.jpg?s=612x612&w=0&k=20&c=dN6YB3vazfd4GZcBd1cZd9CAMLXoCQhDdljtaXOHH0g=",
+      "imageSrc":"https://media.istockphoto.com/id/1572783989/photo/mid-adult-male-banker-smiles-for-the-camera-to-have-his-photo-taken.jpg?s=612x612&w=0&k=20&c=UvMPthdnxhQ2I6MTiA3tvS245ZB2fPKLb7SZ5agRmL4=",
+      "imageSrc":"https://media.istockphoto.com/id/1299931697/photo/teacher-in-saree-standing-poses-in-studio.jpg?s=612x612&w=0&k=20&c=5TXnGVGmrtcxc6YyPvjtWtztVjH_4Ehf3U2fFrE8f5Y="
+    }
+  ]
+},
+{
+  "id": 22,
+  "category": "UPSC",
+  "title": "Civil Services Mastery",
+  "thumbnail":"https://feeds.abplive.com/onecms/images/uploaded-images/2022/02/13/0697cd7bf51a3df7e127929a6f172d93_original.JPG?impolicy=abp_cdn&imwidth=650",
+  "description": "UPSC prep: Comprehensive syllabus, expert guidance, mock exams, current affairs",
+  "price": 2199,
+  "rating": 4.5,
+  "discountPercentage": 20,
+  "teachers": [
+    {
+      "name":"Sarika Lokhande",
+      "name":"Tripti Ojha"
+    },
+    {
+      "imageSrc":"https://media.istockphoto.com/id/1448069431/photo/young-indian-woman-holding-books-in-hand-standing-in-library.jpg?s=612x612&w=0&k=20&c=r3Q2eIsJIgp8ndtqhbcRgoFKRjFM5qwCW2oPJvFqwLs=",
+      "imageSrc":"https://media.istockphoto.com/id/1310210739/photo/portrait-of-indian-woman-as-a-teacher-in-sari-using-computer-sitting-isolated-over-white.jpg?s=612x612&w=0&k=20&c=VCbt5HRb8y2_omUCCmhv9pGKLuw-Si4aZ87CaZcffno="
+    }
+  ]
+},
+{
+  "id": 23,
+  "category": "Bank exams",
+  "title": "IBPS Clerk 2024",
+  "thumbnail":"https://feeds.abplive.com/onecms/images/uploaded-images/2022/02/13/0697cd7bf51a3df7e127929a6f172d93_original.JPG?impolicy=abp_cdn&imwidth=650",
+  "description": "IBPS Clerk Prep: Comprehensive syllabus, practice tests, effective strategies, expert guidance.",
+  "price": 1999,
+  "rating": 4.2,
+  "discountPercentage": 20,
+  "teachers": [
+    {
+      "name":"Alpna Shrivastava",
+      "name":"Krishna Patil"
+    },
+    {
+      "imageSrc":"https://media.istockphoto.com/id/1690409790/photo/school-principal-mam-sitting-happily-proud-of-the-students-of-her-school-smiling.jpg?s=612x612&w=0&k=20&c=YkOlcPeDglrDqYIwVKfXaXW4e9OehffIo_2QfPFKKDY=",
+      "imageSrc":"https://media.istockphoto.com/id/1691089534/photo/serious-thinking-businessman-programmer-looking-at-camera-with-crossed-arms-indian-man.jpg?s=612x612&w=0&k=20&c=TD9c0Pvuykjz1Nku6oW5-VSsttoE89DFgBfF5rj8eRs="
+    }
+  ]
+},
+{
+  "id": 24,
+  "category": "SSC exams",
+  "title": "SSC Guide",
+  "thumbnail":"https://www.pw.live/files001/ssc-exam--seo.png",
+  "description": "SSC Exam Prep: A curriculum for success in government jobs",
+  "price": 2499,
+  "rating": 4.1,
+  "discountPercentage": 20,
+  "teachers": [
+    {
+      "name":"Priya Sahu",
+      "name":"Akhil Nayak"
+    },
+    {
+      "imageSrc":"https://media.istockphoto.com/id/1292136923/photo/young-female-student-or-teacher-with-books.jpg?s=612x612&w=0&k=20&c=AOoctmnT1nqXydR_TRmJrXUxK2OdrkfAweoJG2G17dY=",
+      "imageSrc":"https://media.istockphoto.com/id/1457443548/photo/proud-successful-young-indian-arab-business-man-wearing-suit-portrait.jpg?s=612x612&w=0&k=20&c=hrkUwCB27PxzTS6NEXiVL2YvZP79uDmgM2B24XrN6Ks="
+    }
+  ]
+},
+{
+  "id": 25,
+  "category": "CA intermediate",
+  "title": " Crack CA Intermediate 2024",
+  "thumbnail":"https://www.guruvidya.co.in/assets/img/content/new/ca-intermediate-group-1-course-fees.png",
+  "description": "CA Intermediate course: theory, practice, exams, audit, and taxation.",
+  "price": 2199,
+  "rating": 4.2,
+  "discountPercentage": 20,
+  "teachers": [
+    {
+      "name":"Vinayak Sharma",
+      "name":"Aarti Naroliya"
+    },
+    {
+      "imageSrc":"https://media.istockphoto.com/id/1005843636/photo/middle-aged-man-with-pleasant-face.jpg?s=612x612&w=0&k=20&c=LZRvrJV25ZE6JXTMpxPbvIHHFqY_Xf4sLnVuq9nUAs0=",
+      "imageSrc":"https://media.istockphoto.com/id/1389831937/photo/senior-woman-working-on-laptop-at-home-office.jpg?s=612x612&w=0&k=20&c=UdNFfdulZa8QbNdRgnj6cw83lAYbrRckrQ4Hd1q4IKw="
+    }
+  ]
+}
+  ]
