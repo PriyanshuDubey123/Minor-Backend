@@ -30,7 +30,7 @@ server.use(
   );
   
   
-  server.use(express.static('build'))
+server.use(express.static('build'))
   
 
 server.use(express.json());
