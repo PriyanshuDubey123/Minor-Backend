@@ -1,8 +1,11 @@
 const express = require("express");
+const fs = require('fs');
+const path = require('path');
 
 const server = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const request = require('request');
 
 const authRouters = require("./routes/Auth");
 
@@ -12,6 +15,9 @@ const languageRouters = require("./routes/Language");
 const cartRouters = require("./routes/Cart");
 const orderRouters = require("./routes/Order");
 const usersRouters = require("./routes/User");
+const LiveCoursesRoutes = require('./routes/LiveCourses');
+const CreatorRoutes = require('./routes/CreatorRoutes');
+const CashFreeRoute = require('./routes/Payments/CashFreeRoute');  
 
 const { User } = require("./model/User");
 
@@ -36,6 +42,43 @@ server.use("/categories", categoriesRouters.router);
 server.use("/languages", languageRouters.router);
 server.use("/cart", cartRouters.router);
 server.use("/orders", orderRouters.router);
+server.use("/api/courses", LiveCoursesRoutes);
+server.use("/api/creator", CreatorRoutes.router);
+server.use("/api/cashfree", CashFreeRoute);
+
+
+
+
+// Videos
+
+server.get('/video', (req, res) => {
+  const videoUrl = decodeURIComponent(req.query.videoUrl);
+  const range = req.headers.range;
+
+  if (!range) {
+      res.status(400).send("Requires Range header");
+      return;
+  }
+
+  request(videoUrl, { encoding: null, headers: { range } })
+      .on('response', (response) => {
+          if (response.statusCode === 200 || response.statusCode === 206) {
+              res.writeHead(response.statusCode, {
+                  'Content-Range': response.headers['content-range'],
+                  'Accept-Ranges': response.headers['accept-ranges'],
+                  'Content-Length': response.headers['content-length'],
+                  'Content-Type': response.headers['content-type']
+              });
+              response.pipe(res);
+          } else {
+              res.sendStatus(response.statusCode);
+          }
+      })
+      .on('error', (err) => {
+          res.sendStatus(500);
+          console.error('Error fetching video:', err);
+      });
+});
 
 
 

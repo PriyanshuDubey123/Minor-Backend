@@ -6,6 +6,7 @@ exports.fetchCartByUser = async (req,res)=>{
 
     try{
          const cart = await Cart.find({user:user}).populate('course');
+         console.log(cart)
          res.status(200).json(cart);
     }
     catch(err){

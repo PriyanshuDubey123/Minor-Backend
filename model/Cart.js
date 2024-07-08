@@ -5,7 +5,7 @@ const {Schema} = mongoose;
 const cartSchema = new Schema({
   
     quantity: {type: Number, required:true},
-    course:{type:Schema.Types.ObjectId,ref:'Course',required:true},
+    course:{type:Schema.Types.ObjectId,ref:'LiveCourses',required:true},
     user:{type:Schema.Types.ObjectId,ref:'User',required:true}
 
 })
