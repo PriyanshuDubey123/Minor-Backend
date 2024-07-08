@@ -2,6 +2,8 @@
 
 const crypto = require('crypto');
 
+require('dotenv').config();
+
 const { Cashfree } = require('cashfree-pg');
 const { User } = require('../../model/User');
 const { default: axios } = require('axios');
@@ -10,8 +12,8 @@ const LiveCourses = require('../../model/LiveCourses');
 const Creator = require('../../model/CreatorModal');
 const individualCreatorAnalytics = require('../../model/IndividualCreatorAnalytics');
 
-Cashfree.XClientId = 'TEST10184617998ae7424aa2bd40c27271648101';
-Cashfree.XClientSecret = 'cfsk_ma_test_513eb0caec00e8792b854f01f396db37_2ada4cce';
+Cashfree.XClientId = process.env.CASHFREE_API_KEY;
+Cashfree.XClientSecret = process.env.CASHFREE_API_SECRET;
 Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
 
 
@@ -81,8 +83,8 @@ exports.getOrderStatus = async (req, res) => {
             const orderData = await axios.get(`https://sandbox.cashfree.com/pg/orders/${orderId}`, {
                 headers: {
                     accept: 'application/json',
-                    'x-client-id': 'TEST10184617998ae7424aa2bd40c27271648101',
-                    'x-client-secret': 'cfsk_ma_test_513eb0caec00e8792b854f01f396db37_2ada4cce',
+                    'x-client-id': process.env.CASHFREE_API_KEY,
+                    'x-client-secret': process.env.CASHFREE_API_SECRET,
                     'x-api-version': '2023-08-01'
                 }
             }).catch(error => {
