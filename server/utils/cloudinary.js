@@ -4,9 +4,9 @@ const multer = require('multer');
 
 // Configure Cloudinary
 cloudinary.config({
-  cloud_name: 'dbk8upshv',
-  api_key: '755283273428179',
-  api_secret: 'l356KXnfwucQ0bzx-PDxu9kPkcg'
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET
 });
 
 // Storage configuration for images
@@ -33,7 +33,7 @@ const profileImageUpload = multer({ storage: profileImageStorage });
 const videoStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'videos',
+    folder: 'temporary-videos',
     resource_type: 'video',
     allowed_formats: ['mp4', 'avi', 'mkv'],
   },

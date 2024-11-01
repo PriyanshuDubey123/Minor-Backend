@@ -1,11 +1,24 @@
-const { Order } = require("../model/Order")
+const { Order } = require("../model/Order");
+const { redis } = require("../utils/features");
 
 exports.fetchOrdersByUser = async (req,res)=>{
 
     const {userId} = req.params;
 
     try{
-         const orders = await Order.find({user:userId});
+
+        let orders;
+
+        orders = await redis.get("UserOrders "+userId);
+
+        if(orders){
+            orders = JSON.parse(orders);
+        }
+         else{
+          orders = await Order.find({user:userId});
+          redis.set("UserOrders "+userId, JSON.stringify(orders));
+          redis.expire("UserOrders "+userId, 30);
+         }
          res.status(200).json(orders);
     }
     catch(err){

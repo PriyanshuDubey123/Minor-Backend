@@ -1,0 +1,36 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: nodejs-app
+    ports:
+      - '8080:8080'  
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env 
+
+  mongo:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis
+    ports:
+      - '6379:6379'  # Standard Redis port for connecting with Redis clients
+      - '8001:8001'  # Port for accessing RedisInsight GUI
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongo_data:
+  redis_data:

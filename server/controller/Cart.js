@@ -1,12 +1,23 @@
-const { Cart } = require("../model/Cart")
+const { Cart } = require("../model/Cart");
+const { redis } = require("../utils/features");
 
 exports.fetchCartByUser = async (req,res)=>{
 
     const {user} = req.query;
 
     try{
-         const cart = await Cart.find({user:user}).populate('course');
-         console.log(cart)
+
+       let cart;
+        
+       cart = await redis.get("Cart "+user);
+       if(cart){
+        cart = JSON.parse(cart);
+       }
+       else{
+          cart = await Cart.find({user:user}).populate('course');
+          redis.set("Cart "+user, JSON.stringify(cart));
+          redis.expire("Cart "+user, 30);
+       }
          res.status(200).json(cart);
     }
     catch(err){

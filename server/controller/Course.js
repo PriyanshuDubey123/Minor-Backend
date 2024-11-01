@@ -1,5 +1,6 @@
 
 const LiveCourses = require("../model/LiveCourses");
+const { redis } = require("../utils/features");
 
 exports.createCourse = async(req,res)=>{
   try{
@@ -7,7 +8,7 @@ exports.createCourse = async(req,res)=>{
     const course = new LiveCourses(req.body);
   
 
-        const doc = await LiveCourses.save();
+        const doc = await course.save();
         res.status(201).json(doc);
     }
      catch(err){
@@ -35,8 +36,8 @@ exports.fetchAllCourses = async (req, res) => {
         condition.language = req.query.language;
       }
   
-      let query = LiveCourses.find(condition);
-      let totalCoursesQuery = LiveCourses.find(condition);
+      let query = LiveCourses.find(condition).populate('creatorId');
+      let totalCoursesQuery = LiveCourses.find(condition).populate('creatorId');
   
       if (req.query._sort && req.query._order) {
         const sort = { [req.query._sort]: req.query._order };
@@ -66,8 +67,16 @@ exports.fetchAllCourses = async (req, res) => {
 exports.fetchCourseById = async(req,res)=>{
     const {id} = req.params;
 
-    try{    
-        const course = await LiveCourses.findById(id);
+    try{ 
+        let course;
+        course = await redis.get(`course-${id}`);
+        if(course)
+          course = JSON.parse(course);
+        else{
+         course = await LiveCourses.findById(id);
+         redis.set(`course-${id}`,JSON.stringify(course));
+         redis.expire(`course-${id}`, 30);
+        }
         res.status(200).json(course);
     }
      catch(err){

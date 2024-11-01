@@ -1,3 +1,4 @@
+
 const express = require("express");
 const fs = require('fs');
 const path = require('path');
@@ -19,21 +20,32 @@ const LiveCoursesRoutes = require('./routes/LiveCourses');
 const CreatorRoutes = require('./routes/CreatorRoutes');
 const CashFreeRoute = require('./routes/Payments/CashFreeRoute');  
 
+
 const { User } = require("./model/User");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 
 
-server.use(
-  cors({
-    exposedHeaders: ["X-Total-Count"],
-  })
-  );
-  
   
 server.use(express.static('build'))
+
+server.use(morgan("dev"))
   
 
 server.use(express.json());
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+  exposedHeaders: ["X-Total-Count"],
+};
+
+server.use(cors(corsOptions));
+
+server.use(cookieParser());
 
 server.use("/auth", authRouters.router);
 server.use("/users", usersRouters.router);
@@ -117,6 +129,8 @@ async function main() {
   await mongoose.connect(process.env.MONGODB_URL);
   console.log("database connected");
 }
+
+
 
 server.listen(8080, () => {
   console.log("Server is started on port 8080");

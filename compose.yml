@@ -1,0 +1,49 @@
+version: '3'
+services:
+  app:
+    build: ./server
+    container_name: nodejs-app
+    ports:
+      - '8080:8080'  
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    env_file:
+      - ./server/.env
+
+  mongo:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis
+    ports:
+      - '6379:6379'  # Standard Redis port for connecting with Redis clients
+      - '8001:8001'  # Port for accessing RedisInsight GUI
+    volumes:
+      - redis_data:/data
+
+  transcoder:
+    build: ./Video-Transcoding-Service
+    container_name: video-transcoder
+    restart: always
+    ports:
+      - '4000:4000'
+    env_file:
+      - ./Video-Transcoding-Service/.env
+    depends_on:
+      - redis
+    volumes:
+      - ./Video-Transcoding-Service:/app
+
+volumes:
+  mongo_data:
+  redis_data:

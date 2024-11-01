@@ -1,6 +1,18 @@
 const Creator = require('../model/CreatorModal');
 const LiveCourses  = require ('../model/LiveCourses');
 const { User } = require('../model/User');
+const { Queue } = require('bullmq');
+const path = require('path');
+const fs = require('fs');
+const { cloudinary } = require('../utils/cloudinary');
+
+
+const videoQueue = new Queue('video transcoding', {
+  connection: {
+    host: 'redis',
+    port: 6379,
+  },
+});
 
 exports.createCourse = async (req, res) => {
   try {
@@ -51,8 +63,10 @@ exports.getCourseByCourseId = async(req,res) => {
 
 exports.uploadVideos = async (req, res) => {
   try {
-    const videoUrl = req.file.path; // Get the video URL from Cloudinary response
+
+    // const videoUrl = req.file.path; // Get the video URL from Cloudinary response
     const { title } = req.body; // Access the title from the request body
+    const publicId = req.file.filename;
 
     if (!title) {
       return res.status(400).json({ error: 'Title is required' });
@@ -64,11 +78,17 @@ exports.uploadVideos = async (req, res) => {
       return res.status(404).json({ error: 'Course not found' });
     }
 
-    course.videos.push({ title, videoUrl });
 
-    await course.save();
+    await videoQueue.add('transcode', {
+      public_id: publicId,
+      courseId: course._id,
+      title: title,
+    });
 
-    res.status(200).json({ message: 'Video uploaded successfully', video: { title, videoUrl } });
+    // await cloudinary.uploader.destroy(publicId, { resource_type: 'video' });
+
+    return res.status(200).json({ message: 'Video uploaded and queued for transcoding.' });
+
   } catch (error) {
     console.error('Error uploading video:', error);
     res.status(500).json({ error: 'Failed to upload video' });
@@ -152,5 +172,76 @@ exports.enrollCourse = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while enrolling in the course' });
+  }
+};
+
+
+
+exports.modifyCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+   const course = await LiveCourses.findById(id);
+
+   if(course.modificationCount === 3){
+     await LiveCourses.findByIdAndDelete(id);
+   }
+    else
+   await LiveCourses.findByIdAndUpdate(id,{underReview:false,modification:"Admin Disapproved your course please read the courses policies and retry", $inc:{modificationCount:1}});
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found' });
+    }
+
+    res.status(200).json({ message: 'Course deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+exports.publishCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const course = await LiveCourses.findByIdAndUpdate(id, {underReview:false, isPublished:true, modification:null, modificationCount:0})
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found' });
+    }
+    res.status(200).json({ message: 'Course published successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.AddTrancodedVideos = async (req, res) => {
+  try {
+ 
+    const { title,videoUrls,id } = req.body;
+
+    const course = await LiveCourses.findById(id);
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found' });
+    }
+
+      // Add video URLs to the videos array
+      course.videos.push({
+        title: title,
+        videoUrls: [
+          { resolution: 'master', url: videoUrls['master'] },
+          { resolution: '360p', url: videoUrls['360p'] },
+          { resolution: '480p', url: videoUrls['480p'] },
+          { resolution: '720p', url: videoUrls['720p'] },
+        ],
+      });
+      await course.save(); // Save the course with new video URLs
+
+      console.log('Video URLs saved to course:', id);
+
+    res.status(200).json({ message: 'Video URLs added successfully', course });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

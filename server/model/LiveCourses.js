@@ -33,25 +33,31 @@ const LiveCourseSchema = new mongoose.Schema({
   videos: [{
     title: {
       type: String,
-      required: false,
     },
-    videoUrl: {
-      type: String,
-      required: true,
-    }
+    videoUrls: [{
+      resolution: { type: String },
+      url: { type: String },
+    }]
   }],
   enrolledStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  deleted:{
-    type:Boolean,
-    default:false,
+  deleted: {
+    type: Boolean,
+    default: false,
   },
-  isPublished:{
-    type:Boolean,
-    default:false
+  isPublished: {
+    type: Boolean,
+    default: false
   },
-  underReview:{
-   type:Boolean,
-   default:false
+  underReview: {
+    type: Boolean,
+    default: false
+  },
+  modification: {
+    type: String
+  },
+  modificationCount: {
+    type: Number,
+    default: 0
   }
 }, { timestamps: true });
 
