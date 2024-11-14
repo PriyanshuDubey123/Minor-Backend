@@ -32,8 +32,10 @@ const transcodeVideo = (inputUrl, outputDir, baseURL, courseId, title) => {
           .outputOptions('-f hls')
           .outputOptions('-hls_time 10') // Each .ts file segment duration
           .outputOptions('-hls_list_size 0') // Include all .ts files in .m3u8 file
+          .outputOptions('-hls_flags split_by_time') // Ensure even splitting across segments
           .outputOptions('-hls_segment_filename', `${path.dirname(m3u8File)}/${resolution}p_%03d.ts`) // Set output .ts file pattern
           .outputOptions(`-vf scale=${width}:${height}`) // Video scaling for resolution
+          .outputOptions('-g 50') // Adjust GOP size to ensure consistent keyframes
           .save(m3u8File)
           .on('end', () => {
             console.log(`${resolution}p transcoding finished. Files saved in ${path.dirname(m3u8File)}`);
@@ -49,22 +51,42 @@ const transcodeVideo = (inputUrl, outputDir, baseURL, courseId, title) => {
     // Generate master playlist referencing each resolution playlist after transcoding
     Promise.all(transcodePromises)
       .then(() => {
-        // Adjust the `baseURL` to reference each resolution in the correct folder path on Cloudinary
-        const masterM3U8Content = `#EXTM3U
+        // Read all .ts segments to calculate the total duration for each resolution
+        const getDuration = (file) => {
+          return new Promise((resolve, reject) => {
+            ffmpeg.ffprobe(file, (err, metadata) => {
+              if (err) return reject(err);
+              resolve(metadata.format.duration);
+            });
+          });
+        };
+
+        // Calculate durations for each resolution
+        Promise.all([
+          getDuration(m3u8File360),
+          getDuration(m3u8File480),
+          getDuration(m3u8File720)
+        ])
+          .then(([duration360, duration480, duration720]) => {
+            // Create the master playlist with accurate total duration
+            const masterM3U8Content = `#EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:BANDWIDTH=800000,RESOLUTION=640x360
 ${baseURL}/${courseId}/${title}/360p/index_360p.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=1400000,RESOLUTION=854x480
 ${baseURL}/${courseId}/${title}/480p/index_480p.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1280x720
-${baseURL}/${courseId}/${title}/720p/index_720p.m3u8`;
+${baseURL}/${courseId}/${title}/720p/index_720p.m3u8
+#EXT-X-ENDLIST`;
 
-        // Write the master playlist file
-        fs.writeFileSync(masterM3U8File, masterM3U8Content);
-        console.log('Master m3u8 file created at', masterM3U8File);
+            // Write the master playlist file
+            fs.writeFileSync(masterM3U8File, masterM3U8Content);
+            console.log('Master m3u8 file created at', masterM3U8File);
 
-        // Resolve with paths to all created playlists
-        resolve([m3u8File360, m3u8File480, m3u8File720, masterM3U8File]);
+            // Resolve with paths to all created playlists
+            resolve([m3u8File360, m3u8File480, m3u8File720, masterM3U8File]);
+          })
+          .catch(reject);
       })
       .catch(reject);
   });

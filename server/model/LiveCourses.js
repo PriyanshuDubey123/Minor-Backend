@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const LiveCourseSchema = new mongoose.Schema({
   creatorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Creator' },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   name: {
     type: String,
     required: true,

@@ -50,7 +50,7 @@ let user;
         }
       });
       redis.set("UserPurchasedCourses "+req.params.id, JSON.stringify(user));
-      redis.expire("UserPurchasedCourses "+req.params.id, 1800);
+      redis.expire("UserPurchasedCourses "+req.params.id, 30);
     }
 
     if (!user) {
@@ -78,7 +78,7 @@ exports.fetchTransactions = async (req, res) => {
      else{
        transactions = await UserTransaction.find({ userId: req.params.id }).populate('courseId');
        redis.set("Transactions "+req.params.id, JSON.stringify(transactions));
-       redis.expire("Transactions "+req.params.id, 1800);
+       redis.expire("Transactions "+req.params.id, 30);
      }
       res.json(transactions);
   } catch (err) {

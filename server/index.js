@@ -3,10 +3,52 @@ const express = require("express");
 const fs = require('fs');
 const path = require('path');
 
-const server = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const request = require('request');
+const { Server } = require("socket.io");
+const socketIo = require("socket.io");
+const http = require("http");
+
+
+const server = express();
+
+
+const app = http.createServer(server);
+
+const io = new Server(app, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
+
+const userSocketMap = {};
+
+io.on("connection", (socket) => {
+  // socket.emit("register", "Welcome to the app");
+
+  socket.on("register", (userId) => {
+    // console.log("helloinfluencer")
+    userSocketMap[userId] = socket.id;
+  });
+
+  socket.on("disconnect", () => {
+    const userId = Object.keys(userSocketMap).find(
+      (key) => userSocketMap[key] === socket.id
+    );
+    if (userId) {
+      delete userSocketMap[userId];
+    }
+  });
+});
+
+server.use((req, res, next) => {
+  req.userSocketMap = userSocketMap;
+  req.io = io;
+  next();
+});
 
 const authRouters = require("./routes/Auth");
 
@@ -19,6 +61,9 @@ const usersRouters = require("./routes/User");
 const LiveCoursesRoutes = require('./routes/LiveCourses');
 const CreatorRoutes = require('./routes/CreatorRoutes');
 const CashFreeRoute = require('./routes/Payments/CashFreeRoute');  
+const NotificationRoute = require("./routes/Notification");
+const FriendsRoute = require("./routes/Friends");
+const ChatsRoute = require("./routes/Chat");
 
 
 const { User } = require("./model/User");
@@ -57,6 +102,9 @@ server.use("/orders", orderRouters.router);
 server.use("/api/courses", LiveCoursesRoutes);
 server.use("/api/creator", CreatorRoutes.router);
 server.use("/api/cashfree", CashFreeRoute);
+server.use("/api/notifications",NotificationRoute)
+server.use("/api/friends",FriendsRoute)
+server.use("/api/chats",ChatsRoute)
 
 
 
@@ -132,6 +180,6 @@ async function main() {
 
 
 
-server.listen(8080, () => {
+app.listen(8080, () => {
   console.log("Server is started on port 8080");
 });

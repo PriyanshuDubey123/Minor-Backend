@@ -1,10 +1,12 @@
 const Creator = require('../model/CreatorModal');
-const LiveCourses  = require ('../model/LiveCourses');
+const LiveCourses = require('../model/LiveCourses');
 const { User } = require('../model/User');
 const { Queue } = require('bullmq');
 const path = require('path');
 const fs = require('fs');
 const { cloudinary } = require('../utils/cloudinary');
+const individualCreatorAnalytics = require('../model/IndividualCreatorAnalytics');
+const UserTransaction = require('../model/UserTransaction');
 
 
 const videoQueue = new Queue('video transcoding', {
@@ -14,12 +16,16 @@ const videoQueue = new Queue('video transcoding', {
   },
 });
 
+const generateOrderId = ()=>{
+  return Math.random().toString(16).substring(2, 14);
+}
+
 exports.createCourse = async (req, res) => {
   try {
 
-    const {id} = req.params;
+    const { id } = req.params;
 
-    const {_id} = await Creator.findOne({userId:id});
+    const { _id } = await Creator.findOne({ userId: id });
 
     const { name, duration, description, priceOption, price, special, category, language } = req.body;
 
@@ -27,7 +33,8 @@ exports.createCourse = async (req, res) => {
     const thumbnailUrl = req.file.path;
 
     const newCourse = new LiveCourses({
-      creatorId:_id,
+      creatorId: _id,
+      userId: id,
       name,
       duration,
       description,
@@ -47,17 +54,17 @@ exports.createCourse = async (req, res) => {
   }
 };
 
-exports.getCourseByCourseId = async(req,res) => {
-    try {
-        const course = await LiveCourses.findById(req.params.id).populate('creatorId');
-        if (!course) {
-            return res.status(404).json({ message: 'Course not found' });
-        }
-        res.status(200).json({ course });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error' });
+exports.getCourseByCourseId = async (req, res) => {
+  try {
+    const course = await LiveCourses.findById(req.params.id).populate('creatorId');
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found' });
     }
+    res.status(200).json({ course });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
 }
 
 
@@ -125,9 +132,9 @@ exports.deleteVideo = async (req, res) => {
 exports.Reviews = async (req, res) => {
   try {
     const { id } = req.params;
-   
 
-     await LiveCourses.findByIdAndUpdate(id,{underReview:true},{upsert:true});
+
+    await LiveCourses.findByIdAndUpdate(id, { underReview: true }, { upsert: true });
 
 
     res.status(200).json({ message: 'This Course is under Review' });
@@ -165,6 +172,78 @@ exports.enrollCourse = async (req, res) => {
     user.purchasedCourses.push(courseId);
 
     // Save the updated course and user
+
+    const orderId = generateOrderId();
+
+
+    const userTransaction = new UserTransaction({
+      userId: userId,
+      courseId: courseId,
+      order_id: orderId,
+      amount: 0,
+      currency: "NA"
+    });
+
+
+
+    let creatorAnalytics = await individualCreatorAnalytics.findOne({ creatorId: course.creatorId });
+                    
+                    const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'Asia/Kolkata' });
+                    
+                    if (creatorAnalytics) {
+                        // Document exists, update it
+                        creatorAnalytics.totalSales += 1;
+                        creatorAnalytics.totalRevenue += 0;
+                    
+                        creatorAnalytics.transactions.push({
+                            userId: userId,
+                            order_id: orderId,
+                            amount: 0,
+                            currency: "NA"
+                        });
+                    
+                        // Check if there's an entry for the current date in dateWiseAnalytics
+                        const dateEntry = creatorAnalytics.dateWiseAnalytics.find(entry => 
+                            new Date(entry.date).toLocaleDateString('en-US', { timeZone: 'Asia/Kolkata' }) === currentDate
+                        );
+                    
+                        if (dateEntry) {
+                            // Entry exists, increment totalSales and totalRevenue
+                            dateEntry.totalSales += 1;
+                            dateEntry.totalRevenue += 0;
+                        } else {
+                            // Entry does not exist, add a new entry
+                            creatorAnalytics.dateWiseAnalytics.push({
+                                date: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
+                                totalSales: 1,
+                                totalRevenue: 0
+                            });
+                        }
+                    
+                        await creatorAnalytics.save();
+                    } else {
+                        // Document does not exist, create a new one
+                        creatorAnalytics = new individualCreatorAnalytics({
+                            creatorId: course.creatorId,
+                            totalSales: 1,
+                            totalRevenue: 0,
+                            transactions: [{
+                                userId: userId,
+                                order_id: orderId,
+                                amount: 0,
+                                currency: "NA"
+                            }],
+                            dateWiseAnalytics: [{
+                                date: new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }),
+                                totalSales: 1,
+                                totalRevenue: 0
+                            }]
+                        });
+                    
+                        await creatorAnalytics.save();
+                    }
+                    
+    await userTransaction.save();
     await course.save();
     await user.save();
 
@@ -181,13 +260,13 @@ exports.modifyCourse = async (req, res) => {
   try {
     const { id } = req.params;
 
-   const course = await LiveCourses.findById(id);
+    const course = await LiveCourses.findById(id);
 
-   if(course.modificationCount === 3){
-     await LiveCourses.findByIdAndDelete(id);
-   }
+    if (course.modificationCount === 3) {
+      await LiveCourses.findByIdAndDelete(id);
+    }
     else
-   await LiveCourses.findByIdAndUpdate(id,{underReview:false,modification:"Admin Disapproved your course please read the courses policies and retry", $inc:{modificationCount:1}});
+      await LiveCourses.findByIdAndUpdate(id, { underReview: false, modification: "Admin Disapproved your course please read the courses policies and retry", $inc: { modificationCount: 1 } });
 
     if (!course) {
       return res.status(404).json({ message: 'Course not found' });
@@ -202,7 +281,7 @@ exports.modifyCourse = async (req, res) => {
 exports.publishCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const course = await LiveCourses.findByIdAndUpdate(id, {underReview:false, isPublished:true, modification:null, modificationCount:0})
+    const course = await LiveCourses.findByIdAndUpdate(id, { underReview: false, isPublished: true, modification: null, modificationCount: 0 })
 
     if (!course) {
       return res.status(404).json({ message: 'Course not found' });
@@ -216,8 +295,8 @@ exports.publishCourse = async (req, res) => {
 
 exports.AddTrancodedVideos = async (req, res) => {
   try {
- 
-    const { title,videoUrls,id } = req.body;
+
+    const { title, videoUrls, id } = req.body;
 
     const course = await LiveCourses.findById(id);
 
@@ -225,19 +304,19 @@ exports.AddTrancodedVideos = async (req, res) => {
       return res.status(404).json({ message: 'Course not found' });
     }
 
-      // Add video URLs to the videos array
-      course.videos.push({
-        title: title,
-        videoUrls: [
-          { resolution: 'master', url: videoUrls['master'] },
-          { resolution: '360p', url: videoUrls['360p'] },
-          { resolution: '480p', url: videoUrls['480p'] },
-          { resolution: '720p', url: videoUrls['720p'] },
-        ],
-      });
-      await course.save(); // Save the course with new video URLs
+    // Add video URLs to the videos array
+    course.videos.push({
+      title: title,
+      videoUrls: [
+        { resolution: 'master', url: videoUrls['master'] },
+        { resolution: '360p', url: videoUrls['360p'] },
+        { resolution: '480p', url: videoUrls['480p'] },
+        { resolution: '720p', url: videoUrls['720p'] },
+      ],
+    });
+    await course.save(); // Save the course with new video URLs
 
-      console.log('Video URLs saved to course:', id);
+    console.log('Video URLs saved to course:', id);
 
     res.status(200).json({ message: 'Video URLs added successfully', course });
   } catch (error) {
