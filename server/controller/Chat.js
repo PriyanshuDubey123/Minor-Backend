@@ -48,6 +48,7 @@ const getChats = async (req, res) => {
         chatName: chat.chatName || participants.map(p => p.username).join(", "),
         lastMessage: chat.lastMessage,
         participants,
+        isBlocked: chat.isBlocked,  
         updatedAt: chat.updatedAt,
         createdAt: chat.createdAt,
       };
@@ -81,16 +82,16 @@ const sendMessage = async (req, res) => {
       // If the chat does not exist, create a new one
       chat = new Chat({
         participants: [
-          { id: senderId, unreadMessagesCount: 0, onlineStatus: false },
-          { id: receiverId, unreadMessagesCount: 1, onlineStatus: false }, // Increment unread for receiver
+          { id: senderId, unreadMessagesCount: 1, onlineStatus: false },
+          { id: receiverId, unreadMessagesCount: 0, onlineStatus: false }, // Increment unread for receiver
         ],
       });
       await chat.save();
     } else {
       // Increment unread message count for the receiver
-      const receiver = chat.participants.find((p) => p.id.toString() === receiverId.toString());
-      if (receiver) {
-        receiver.unreadMessagesCount += 1;
+      const sender = chat.participants.find((p) => p.id.toString() === senderId.toString());
+      if (sender) {
+        sender.unreadMessagesCount += 1;
       }
       await chat.save();
     }
@@ -120,6 +121,10 @@ const sendMessage = async (req, res) => {
         console.log("Sending message to socket:", socketId);
         io.to(socketId).emit('messages', message);
       }
+      else{
+        console.log("Socket ID not found for receiver");
+      
+      }
     }
 
     return res.status(201).json(message);
@@ -144,7 +149,7 @@ const createChat = async (req, res) => {
         });
 
         if(findExistingChat){
-            return res.status(400).json({ error: "Chat already exists" });
+            return res.status(200).json({ error: "Chat already exists" });
         }
 
         const chat = new Chat({
@@ -177,9 +182,10 @@ const updateMessageReadStatus = async (req, res) => {
     });
    console.log(chat)
     if(chat){
-      const receiver = chat.participants.find((p) => p.id.toString() === receiverId.toString());
-      if (receiver) {
-        receiver.unreadMessagesCount -= 1;
+      const sender = chat.participants.find((p) => p.id.toString() === message.sender.toString());
+      if (sender) {
+        if(sender.unreadMessagesCount > 0)
+        sender.unreadMessagesCount -= 1;
       }
       await chat.save();
     }
@@ -202,5 +208,40 @@ const updateMessageReadStatus = async (req, res) => {
   }
 }
 
-module.exports = { getMessagesForChat, getChats, sendMessage, createChat, updateMessageReadStatus };
+
+const markChatMessagesAsRead = async(req,res) => {
+  try{
+
+  const {chatId,participantId} = req.params;
+  const {userId,unreadMessagesCount} = req.body;
+
+  await Message.updateMany(
+    { chat: chatId, sender: { $ne: userId }, isRead: false },
+    { $set: { isRead: true } }
+  );
+
+  await Chat.updateOne(
+    { _id: chatId, "participants.id": participantId },
+    { $set: { "participants.$.unreadMessagesCount": 0 } }
+  );
+
+
+  const { userSocketMap } = req;
+  const { io } = req;
+  const socketId = userSocketMap[participantId.toString()];
+
+
+  if (socketId) {
+    console.log("Updating message to socket:", socketId);
+    io.to(socketId).emit('updateMessages',{unreadMessagesCount,chat:chatId});
+  }
+
+  return res.status(200).json({ message: "Messages marked as read successfully" });
+
+  }catch(err){
+     return res.status(500).json({ error: "Failed to mark messages as read" });
+  }
+}
+
+module.exports = { getMessagesForChat, getChats, sendMessage, createChat, updateMessageReadStatus, markChatMessagesAsRead };
 

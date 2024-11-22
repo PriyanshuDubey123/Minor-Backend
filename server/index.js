@@ -29,17 +29,62 @@ const userSocketMap = {};
 io.on("connection", (socket) => {
   // socket.emit("register", "Welcome to the app");
 
-  socket.on("register", (userId) => {
+  socket.on("register", async(userId) => {
     // console.log("helloinfluencer")
     userSocketMap[userId] = socket.id;
+
+    const chats = await Chat.find({
+      "participants.id": userId,
+    });
+    
+    if (chats && chats.length > 0) {
+      for (const chat of chats) {
+        const participant = chat.participants.find(
+          (p) => p?.id?.toString() === userId?.toString()
+        );
+    
+        if (participant && !participant.onlineStatus) {
+          participant.onlineStatus = true; // Update the field in memory
+        }
+    
+        await chat.save(); // Save each chat document after updating
+      }
+    socket.broadcast.emit("receiveOnlineStatus", { userId, status: true });
+      console.log("Updated online status for relevant chats.");
+    } else {
+      console.log("No chats found for the given user.");
+    }
+    
+
   });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", async() => {
     const userId = Object.keys(userSocketMap).find(
       (key) => userSocketMap[key] === socket.id
     );
-    if (userId) {
+    if (userId && userId!=="null") {
       delete userSocketMap[userId];
+      const chats = await Chat.find({
+        "participants.id": userId
+      });
+      
+      if (chats && chats.length > 0) {
+        for (const chat of chats) {
+          const participant = chat.participants.find(
+            (p) => p?.id?.toString() === userId?.toString()
+          );
+      
+          if (participant && participant.onlineStatus) {
+            participant.onlineStatus = false; // Update the field in memory
+          }
+      
+          await chat.save(); // Save each chat document after updating
+        }
+    socket.broadcast.emit("receiveOnlineStatus", { userId, status: false });
+        console.log("Updated online status for relevant chats.");
+      } else {
+        console.log("No chats found for the given user.");
+      }
     }
   });
 });
@@ -64,11 +109,13 @@ const CashFreeRoute = require('./routes/Payments/CashFreeRoute');
 const NotificationRoute = require("./routes/Notification");
 const FriendsRoute = require("./routes/Friends");
 const ChatsRoute = require("./routes/Chat");
+const LiveClassRoute = require("./routes/LiveClass");
 
 
 const { User } = require("./model/User");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const Chat = require("./model/Chat");
 
 
 
@@ -105,6 +152,7 @@ server.use("/api/cashfree", CashFreeRoute);
 server.use("/api/notifications",NotificationRoute)
 server.use("/api/friends",FriendsRoute)
 server.use("/api/chats",ChatsRoute)
+server.use("/api/livestream",LiveClassRoute)
 
 
 

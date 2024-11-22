@@ -1,5 +1,5 @@
 const express = require('express');
-const { getMessagesForChat, getChats, sendMessage, createChat, updateMessageReadStatus } = require('../controller/Chat');
+const { getMessagesForChat, getChats, sendMessage, createChat, updateMessageReadStatus, markChatMessagesAsRead } = require('../controller/Chat');
 
 const router = express.Router();
 
@@ -8,6 +8,7 @@ router
   .get('/getuserchat/:userId', getChats)
   .post('/sendmessage', sendMessage)
   .post('/createchat', createChat)
-  .put('/updatemessagereadststus/:messageId', updateMessageReadStatus);
+  .put('/updatemessagereadstatus/:messageId', updateMessageReadStatus)
+  .put('/markchatmessagesasread/:chatId/:participantId', markChatMessagesAsRead);
 
 module.exports = router;

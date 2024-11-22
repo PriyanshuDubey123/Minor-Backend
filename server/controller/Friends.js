@@ -1,5 +1,7 @@
+const Chat = require("../model/Chat");
 const Friends = require("../model/Friends");
 const LiveCourses = require("../model/LiveCourses");
+const Message = require("../model/Message");
 const { User } = require("../model/User");
 
 exports.findFriends = async (req, res) => {
@@ -294,3 +296,60 @@ exports.rejectFriendRequestAndBlockFriend = async (req, res) => {
         return res.status(500).json({ message: err.message || "Internal Server Error" });
     }
 };
+
+exports.removeFriend = async (req, res) => {
+    try {
+        const { user, friend } = req.body;
+
+        // Find the user's friends document
+        const userFriends = await Friends.findOne({ userId: user.id });
+        if (!userFriends) {
+            return res.status(404).json({ message: "User's friends not found." });
+        }
+
+        // Find the friend's friends document
+        const friendFriends = await Friends.findOne({ userId: friend.userId });
+        if (!friendFriends) {
+            return res.status(404).json({ message: "Friend's friends not found." });
+        }
+
+        // Remove the friend from the user's friends list
+        const userFriendIndex = userFriends.friends.findIndex(
+            (f) => f.userId.toString() === friend.userId
+        );
+        if (userFriendIndex === -1) {
+            return res.status(400).json({ message: "Friend not found in user's friends list." });
+        }
+
+        const [removedFriend] = userFriends.friends.splice(userFriendIndex, 1);
+        userFriends.blockedUsers.push(removedFriend);
+
+        // Remove the user from the friend's friends list
+        const friendFriendIndex = friendFriends.friends.findIndex(
+            (f) => f.userId.toString() === user.id
+        );
+        if (friendFriendIndex === -1) {
+            return res.status(400).json({ message: "User not found in friend's friends list." });
+        }
+
+        const [removedUser] = friendFriends.friends.splice(friendFriendIndex, 1);
+        friendFriends.blockedUsers.push(removedUser);
+
+        // Save the updated documents
+        await userFriends.save();
+        await friendFriends.save();
+
+        let chat = await Chat.findOne({
+            "participants.id": { $all: [user.id, friend.userId] },
+        });
+
+        await Message.deleteMany({ chat: chat._id });
+
+        await Chat.findByIdAndDelete(chat._id); 
+
+        return res.status(200).json({ message: "User successfully removed from friends." });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+};
+
