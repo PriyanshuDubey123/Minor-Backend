@@ -59,7 +59,20 @@ const LiveCourseSchema = new mongoose.Schema({
   modificationCount: {
     type: Number,
     default: 0
-  }
+  },
+  discountPercentage:{
+    type:Number,
+    default:0,
+    min: 0, max: 100
+  },
+  ratings:[{
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    rating: { type: Number, min: 1, max: 5 }
+  }],
+  overAllRating: {
+    type: Number,
+    default: 0
+  } 
 }, { timestamps: true });
 
 const LiveCourses = mongoose.model('LiveCourses', LiveCourseSchema);

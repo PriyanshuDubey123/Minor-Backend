@@ -1,5 +1,5 @@
 const express = require('express');
-const { createCourse, getCourseByCourseId, uploadVideos, deleteVideo, Reviews, enrollCourse, publishCourse, modifyCourse, AddTrancodedVideos } = require('../controller/LiveCourses');
+const { createCourse, getCourseByCourseId, uploadVideos, deleteVideo, Reviews, enrollCourse, publishCourse, modifyCourse, AddTrancodedVideos, rateTheCourse, updateDiscount } = require('../controller/LiveCourses');
 const { imageUpload, videoUpload } = require('../utils/cloudinary');
 // Import the configurations
 
@@ -15,5 +15,8 @@ router.post('/enroll/:courseId/:userId', enrollCourse);
 router.put('/modify/:id',modifyCourse)
 router.put('/publish/:id',publishCourse)
 router.post('/add-transcoded-videos',AddTrancodedVideos)
+router.post('/rate-the-course',rateTheCourse)
+router.post('/:courseId/discount', updateDiscount);
+
 
 module.exports = router;

@@ -324,3 +324,74 @@ exports.AddTrancodedVideos = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+
+exports.rateTheCourse = async (req, res) => {
+  try {
+    const { userId, courseId, rating } = req.body;
+
+    // Validate input
+    if (!userId || !courseId || !rating || rating < 1 || rating > 5) {
+      return res.status(400).json({ message: 'Invalid input data.' });
+    }
+
+    // Find the course by ID
+    const course = await LiveCourses.findById(courseId);
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found.' });
+    }
+
+    // Check if the user has already rated the course
+    const existingRating = course.ratings.find(
+      (r) => r.userId.toString() === userId
+    );
+    if (existingRating) {
+      return res.status(400).json({ message: 'You have already rated this course.' });
+    }
+
+    // Add the new rating
+    course.ratings.push({ userId, rating });
+
+    // Recalculate overall rating
+    const totalRatings = course.ratings.length;
+    const sumOfRatings = course.ratings.reduce((acc, item) => acc + item.rating, 0);
+    course.overAllRating = sumOfRatings / totalRatings;
+
+    // Save the updated course
+    await course.save();
+
+    res.status(200).json({
+      message: 'Rating submitted successfully.',
+      overAllRating: course.overAllRating,
+    });
+  } catch (error) {
+    console.error('Error submitting rating:', error);
+    res.status(500).json({ message: 'Error submitting rating.' });
+  }
+};
+ 
+
+exports.updateDiscount = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const { discountPercentage } = req.body;
+
+    if (discountPercentage < 0 || discountPercentage > 100) {
+      return res.status(400).json({ message: "Invalid discount percentage." });
+    }
+
+    const course = await LiveCourses.findByIdAndUpdate(
+      courseId,
+      { discountPercentage },
+      { new: true }
+    );
+
+    if (!course) {
+      return res.status(404).json({ message: "Course not found." });
+    }
+
+    res.status(200).json({ message: "Discount updated successfully.", course });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating discount.", error });
+  }
+};
