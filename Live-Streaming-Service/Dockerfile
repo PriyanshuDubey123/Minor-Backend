@@ -1,14 +1,28 @@
 FROM ubuntu:focal
 
-RUN /usr/bin/apt-get update && \
-    /usr/bin/apt-get install -y curl && \
+# Install necessary dependencies
+RUN apt-get update && \
+    apt-get install -y curl && \
     curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-    /usr/bin/apt-get update && \
-    /usr/bin/apt-get upgrade -y && \
-    /usr/bin/apt-get install -y nodejs ffmpeg
+    apt-get update && \
+    apt-get install -y nodejs ffmpeg
 
-WORKDIR /home/app
+WORKDIR /live-streaming-service
 
-RUN npm i -g nodemon
+# Install nodemon globally
+RUN npm install -g nodemon
 
-CMD nodemon index.js
+# Copy package.json and package-lock.json to the container
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port (if necessary for communication)
+EXPOSE 5000
+
+# Start the application with nodemon
+CMD ["nodemon", "index.js"]

@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
 
       try{
 
-        await axios.delete('http://host.docker.internal:8080/api/livestream/delete');
+        await axios.delete('http://app:8080/api/livestream/delete');
 
     if (ffmpegProcess) {
       ffmpegProcess.stdin.end();

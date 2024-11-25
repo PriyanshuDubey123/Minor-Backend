@@ -116,6 +116,7 @@ const { User } = require("./model/User");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const Chat = require("./model/Chat");
+const { errorMiddleware } = require("./middlewares/error");
 
 
 
@@ -138,6 +139,7 @@ const corsOptions = {
 server.use(cors(corsOptions));
 
 server.use(cookieParser());
+
 
 server.use("/auth", authRouters.router);
 server.use("/users", usersRouters.router);
@@ -226,6 +228,7 @@ async function main() {
   console.log("database connected");
 }
 
+server.use(errorMiddleware);
 
 
 app.listen(8080, () => {
